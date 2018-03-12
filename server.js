@@ -12,6 +12,7 @@ const apiKey = "871feeb0aba09430c9465b40bcb07317";
 app.use(cors())
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => { console.log("This is working") });
 app.get('/upcomingMovies', (req, res) => { home.handleUpcomingMoviesGet(req, res, fetch, apiKey) });
 app.get('/topRated', (req, res) => { home.handleTopRatedGet(req, res, fetch, apiKey) });
 app.get('/popular', (req, res) => { home.handlePopularGet(req, res, fetch, apiKey) });
