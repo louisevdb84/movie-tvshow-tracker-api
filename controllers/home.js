@@ -42,6 +42,13 @@ const handleGenreGet = (req, res, fetch, apiKey) => {
         .catch(err => res.status(400).json('Error getting now playing movies'));        
 }
 
+const handleIdGet = (req, res, fetch, apiKey) => {
+    fetch(`https://api.themoviedb.org/3/movie/${req.body.id}?api_key=${apiKey}`)
+        .then(response => response.json())
+        .then(movies => res.json(movies))
+        .catch(err => res.status(400).json('Error getting movie by id'));    
+}
+
 
 module.exports = {
     handleUpcomingMoviesGet,
@@ -49,6 +56,7 @@ module.exports = {
     handlePopularGet,
     handleNowPlayingGet,
     handleSearchPost,
-    handleGenreGet
+    handleGenreGet,
+    handleIdGet
     
 }
