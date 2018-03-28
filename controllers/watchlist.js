@@ -33,4 +33,18 @@ const handleWatchlistGET = (req, res, db, fetch, apiKey) => {
   
 }
 
-module.exports = {handleWatchlistGET, handleWatchlistPOST}
+const handleWatchlistDelete = (req, res, db) => {
+    const { id } = req.body;
+    if (!id) {
+        return res.status(400).json('Incorrect form submission');
+    }
+    
+    db('journal').where('id', id)
+        .del()    
+            .then(entry => {
+                res.json({ id:  id  } );
+            })
+            .catch(err => res.status(400).json('Unable to delete watchlist item'))    
+}    
+
+module.exports = {handleWatchlistGET, handleWatchlistPOST, handleWatchlistDelete}

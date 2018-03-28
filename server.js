@@ -39,6 +39,7 @@ app.post('/genres', (req, res) => { home.handleGenreGet(req, res, fetch, apiKey)
 
 app.post('/id', (req, res) => { home.handleIdGet(req, res, fetch, apiKey) });
 app.post('/addwatchlist', (req, res) => { watchlist.handleWatchlistPOST(req, res, db) });
+app.post('/deletewatchlist', (req, res) => { watchlist.handleWatchlistDelete(req, res, db) });
 app.post('/watchlist', (req, res) => { watchlist.handleWatchlistGET(req, res, db, fetch, apiKey) });
 app.post('/addwatched', (req, res) => { watched.handleWatchedPOST(req, res, db) });
 app.post('/watched', (req, res) => { watched.handleWatchedGET(req, res, db, fetch, apiKey) });
