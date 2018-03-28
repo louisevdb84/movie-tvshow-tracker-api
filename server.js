@@ -39,6 +39,8 @@ app.post('/genres', (req, res) => { home.handleGenreGet(req, res, fetch, apiKey)
 app.post('/id', (req, res) => { home.handleIdGet(req, res, fetch, apiKey) });
 app.post('/addwatchlist', (req, res) => { watchlist.handleWatchlistPOST(req, res, db) });
 app.post('/watchlist', (req, res) => { watchlist.handleWatchlistGET(req, res, db, fetch, apiKey) });
+app.post('/addwatched', (req, res) => { watched.handleWatchedPOST(req, res, db) });
+app.post('/watched', (req, res) => { watched.handleWatchedGET(req, res, db, fetch, apiKey) });
 
 app.listen(process.env.PORT || 3001, () => console.log('App is running on port 3001'))
 
