@@ -39,7 +39,7 @@ const handleWatchlistDelete = (req, res, db) => {
         return res.status(400).json('Incorrect form submission');
     }
     
-    db('journal').where('movieid', id).andWhere('username', username)
+    db('watchlist').where('movieid', id).andWhere('username', username)
         .del()    
             .then(entry => {
                 res.json({ movieid:  id  } );
