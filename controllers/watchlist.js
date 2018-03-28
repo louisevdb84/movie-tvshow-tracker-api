@@ -39,10 +39,10 @@ const handleWatchlistDelete = (req, res, db) => {
         return res.status(400).json('Incorrect form submission');
     }
     
-    db('journal').where('id', id).andWhere('username', username)
+    db('journal').where('movieid', id).andWhere('username', username)
         .del()    
             .then(entry => {
-                res.json({ id:  id  } );
+                res.json({ movieid:  id  } );
             })
             .catch(err => res.status(400).json('Unable to delete watchlist item'))    
 }    
