@@ -34,12 +34,12 @@ const handleWatchlistGET = (req, res, db, fetch, apiKey) => {
 }
 
 const handleWatchlistDelete = (req, res, db) => {
-    const { id } = req.body;
-    if (!id) {
+    const { id, username } = req.body;
+    if (!id||!username) {
         return res.status(400).json('Incorrect form submission');
     }
     
-    db('journal').where('id', id)
+    db('journal').where('id', id).andWhere('username', username)
         .del()    
             .then(entry => {
                 res.json({ id:  id  } );
