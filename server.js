@@ -8,6 +8,7 @@ const home = require('./controllers/home');
 const login = require('./controllers/login');
 const register = require('./controllers/register');
 const watchlist = require('./controllers/watchlist');
+const watched = require('./controllers/watched');
 
 const app = express();
 const apiKey = "871feeb0aba09430c9465b40bcb07317";
