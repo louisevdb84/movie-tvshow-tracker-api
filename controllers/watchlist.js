@@ -47,4 +47,19 @@ const handleWatchlistDelete = (req, res, db) => {
             .catch(err => res.status(400).json('Unable to delete watchlist item'))    
 }    
 
-module.exports = {handleWatchlistGET, handleWatchlistPOST, handleWatchlistDelete}
+const handleWatchedDelete = (req, res, db) => {
+    const { id, username } = req.body;
+    if (!id||!username) {
+        return res.status(400).json('Incorrect form submission');
+    }
+    
+    db('watched').where('movieid', id).andWhere('username', username)
+        .del()    
+            .then(entry => {
+                res.json({ movieid:  id  } );
+            })
+            .catch(err => res.status(400).json('Unable to delete watched item'))    
+}    
+
+
+module.exports = {handleWatchlistGET, handleWatchlistPOST, handleWatchlistDelete, handleWatchedDelete}
