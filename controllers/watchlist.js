@@ -62,4 +62,4 @@ const handleWatchedDelete = (req, res, db) => {
 }    
 
 
-module.exports = {handleWatchlistGET, handleWatchlistPOST, handleWatchlistDelete, handleWatchedDelete}
+module.exports = { handleWatchlistGET, handleWatchlistPOST, handleWatchlistDelete, handleWatchedDelete }
