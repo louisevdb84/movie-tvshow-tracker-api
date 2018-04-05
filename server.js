@@ -8,6 +8,7 @@ const home = require('./controllers/home');
 const login = require('./controllers/login');
 const register = require('./controllers/register');
 const watchlist = require('./controllers/watchlist');
+const dislike = require('./controllers/dislike');
 const watched = require('./controllers/watched');
 
 const app = express();
@@ -49,10 +50,16 @@ app.post('/cast', (req, res) => { home.getCast(req, res, fetch, apiKey) });
 app.post('/trailers', (req, res) => { home.getTrailers(req, res, fetch, apiKey) });
 
 app.post('/id', (req, res) => { home.handleIdGet(req, res, fetch, apiKey) });
+
 app.post('/addwatchlist', (req, res) => { watchlist.handleWatchlistPOST(req, res, db) });
 app.post('/deletewatchlist', (req, res) => { watchlist.handleWatchlistDelete(req, res, db) });
 app.post('/deletewatched', (req, res) => { watchlist.handleWatchedDelete(req, res, db) });
 app.post('/watchlist', (req, res) => { watchlist.handleWatchlistGET(req, res, db, fetch, apiKey) });
+
+app.post('/addDislike', (req, res) => { dislike.handleDislikePOST(req, res, db) });
+app.post('/deleteDislike', (req, res) => { dislike.handleDislikeDelete(req, res, db) });
+app.post('/dislike', (req, res) => { dislike.handleDislikeGET(req, res, db, fetch, apiKey) });
+
 app.post('/addwatched', (req, res) => { watched.handleWatchedPOST(req, res, db) });
 app.post('/watched', (req, res) => { watched.handleWatchedGET(req, res, db, fetch, apiKey) });
 
