@@ -29,10 +29,19 @@ const db = knex({
 app.get('/', (req, res) => { res.send('It is working!') });
 app.post('/login', login.handleLogin(db, bcrypt));
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) });
-app.get('/upcomingMovies', (req, res) => { home.handleUpcomingMoviesGet(req, res, fetch, apiKey) });
-app.get('/topRated', (req, res) => { home.handleTopRatedGet(req, res, fetch, apiKey) });
-app.get('/popular', (req, res) => { home.handlePopularGet(req, res, fetch, apiKey) });
-app.get('/nowPlaying', (req, res) => { home.handleNowPlayingGet(req, res, fetch, apiKey) });
+
+app.post('/upcomingMovies', (req, res) => { home.handleUpcomingMoviesGet(req, res, fetch, apiKey) });
+app.get('/countUpcoming', (req, res) => { home.upcomingPageCount(req, res, fetch, apiKey) });
+
+app.post('/topRated', (req, res) => { home.handleTopRatedGet(req, res, fetch, apiKey) });
+app.get('/countTopRated', (req, res) => { home.topRatedPageCount(req, res, fetch, apiKey) });
+
+app.post('/popular', (req, res) => { home.handlePopularGet(req, res, fetch, apiKey) });
+app.get('/countPopular', (req, res) => { home.popularPageCount(req, res, fetch, apiKey) });
+
+app.post('/nowPlaying', (req, res) => { home.handleNowPlayingGet(req, res, fetch, apiKey) });
+app.get('/countNowPlaying', (req, res) => { home.nowPlayingPageCount(req, res, fetch, apiKey) });
+
 app.post('/search', (req, res) => { home.handleSearchPost(req, res, fetch, apiKey) });
 app.get('/genres', (req, res) => { home.handleGenreGet(req, res, fetch, apiKey) });
 app.post('/genres', (req, res) => { home.handleGenreGet(req, res, fetch, apiKey) });

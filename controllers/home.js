@@ -1,34 +1,64 @@
 const handleUpcomingMoviesGet = (req, res, fetch, apiKey) => {
-    fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${req.body.page}`)
         .then(response => response.json())
         .then(movies => res.json(movies.results))
         .catch(err => res.status(400).json('Error getting upcoming movies'));    
 }
 
+const upcomingPageCount = (req, res, fetch, apiKey) => {
+    fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US`)
+        .then(response => response.json())
+        .then(movies => res.json(movies.total_pages))
+        .catch(err => res.status(400).json('Error getting upcoming movies'));    
+}
+
 const handleTopRatedGet = (req, res, fetch, apiKey) => {
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${req.body.page}`)
         .then(response=>response.json())       
         .then(movies => res.json(movies.results))  
         .catch(err => res.status(400).json('Error getting top rated movies'));        
 }
 
+const topRatedPageCount = (req, res, fetch, apiKey) => {
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US`)
+        .then(response=>response.json())       
+        .then(movies => res.json(movies.total_pages))
+        .catch(err => res.status(400).json('Error getting top rated movies'));        
+}
+
 const handlePopularGet = (req, res, fetch, apiKey) => {
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${req.body.page}`)
         .then(response=>response.json())       
         .then(movies => res.json(movies.results))  
         .catch(err => res.status(400).json('Error getting popular movies'));        
 }
 
+const popularPageCount = (req, res, fetch, apiKey) => {
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US`)
+        .then(response=>response.json())       
+        .then(movies => res.json(movies.total_pages))
+        .catch(err => res.status(400).json('Error getting popular movies'));        
+}
+
 const handleNowPlayingGet = (req, res, fetch, apiKey) => {
-    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${req.body.page}`)
         .then(response=>response.json())       
         .then(movies => res.json(movies.results))  
         .catch(err => res.status(400).json('Error getting now playing movies'));        
 }
 
-const handleSearchPost = (req, res, fetch, apiKey) => {
+const nowPlayingPageCount = (req, res, fetch, apiKey) => {
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US`)
+        .then(response=>response.json())       
+        .then(movies => res.json(movies.total_pages))
+        .catch(err => res.status(400).json('Error getting now playing movies'));        
+}
+
+
+// ********************************************************************************************************************
+
+const handleSearchPost = (req, res, fetch, apiKey) => {    
     
-    // fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=the+avengers`)
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${req.body.searchMovies}`)
         .then(response=>response.json())       
         .then(movies => res.json(movies.results))  
@@ -57,6 +87,10 @@ module.exports = {
     handleNowPlayingGet,
     handleSearchPost,
     handleGenreGet,
-    handleIdGet
+    handleIdGet,
+    upcomingPageCount,
+    topRatedPageCount,
+    popularPageCount,
+    nowPlayingPageCount
     
 }
