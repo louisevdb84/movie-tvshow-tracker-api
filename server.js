@@ -45,6 +45,8 @@ app.get('/countNowPlaying', (req, res) => { home.nowPlayingPageCount(req, res, f
 app.post('/search', (req, res) => { home.handleSearchPost(req, res, fetch, apiKey) });
 app.get('/genres', (req, res) => { home.handleGenreGet(req, res, fetch, apiKey) });
 app.post('/genres', (req, res) => { home.handleGenreGet(req, res, fetch, apiKey) });
+app.post('/cast', (req, res) => { home.getCast(req, res, fetch, apiKey) });
+app.post('/trailers', (req, res) => { home.getTrailers(req, res, fetch, apiKey) });
 
 app.post('/id', (req, res) => { home.handleIdGet(req, res, fetch, apiKey) });
 app.post('/addwatchlist', (req, res) => { watchlist.handleWatchlistPOST(req, res, db) });
