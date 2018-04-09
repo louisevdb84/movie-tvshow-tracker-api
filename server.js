@@ -72,9 +72,13 @@ app.post('/watched', (req, res) => { watched.handleWatchedGET(req, res, db, fetc
 
 const popularTV = require('./controllers/TV/PopularTV');
 const topRatedTV = require('./controllers/TV/TopRatedTV');
+const onTheAirTV = require('./controllers/TV/OnTheAirTV');
+const airingTodayTV = require('./controllers/TV/AiringTodayTV');
 
 app.post('/popularTV', (req, res) => { popularTV.popularGet(req, res, fetch, apiKey) });
 app.post('/topRatedTV', (req, res) => { topRatedTV.topRatedGet(req, res, fetch, apiKey) });
+app.post('/onTheAirTV', (req, res) => { onTheAirTV.onTheAirGet(req, res, fetch, apiKey) });
+app.post('/airingTodayTV', (req, res) => { airingTodayTV.airingTodayGet(req, res, fetch, apiKey) });
 
 //#endregion
 
