@@ -4,16 +4,14 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
 const fetch = require('node-fetch');
-const home = require('./controllers/home');
+
 const login = require('./controllers/login');
 const register = require('./controllers/register');
-const watchlist = require('./controllers/watchlist');
-const dislike = require('./controllers/dislike');
-const watched = require('./controllers/watched');
+
 
 const app = express();
-const apiKey = "871feeb0aba09430c9465b40bcb07317";
-// const apiKey = process.env.apiKey;
+
+const apiKey = process.env.MovieDbApiKey;
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -21,11 +19,16 @@ app.use(bodyParser.json());
 const db = knex({
     client: 'pg',
     connection: {
-        // connectionString: process.env.DATABASE_URL,
-        connectionString: "postgres://kdnxhxxieuhxxx:a71206b430f5251cc21a952acbd57b25d413887463cf3fac6505991823188689@ec2-23-21-121-220.compute-1.amazonaws.com:5432/d1ch8ubjutkpio",
+        connectionString: process.env.MovieDbDatabaseURL,        
         ssl: true,
     }
 });
+
+//#region MOVIES
+const home = require('./controllers/Movies/home');
+const watchlist = require('./controllers/Movies/watchlist');
+const dislike = require('./controllers/Movies/dislike');
+const watched = require('./controllers/Movies/watched');
 
 app.get('/', (req, res) => { res.send('It is working!') });
 app.post('/login', login.handleLogin(db, bcrypt));
@@ -63,7 +66,14 @@ app.post('/dislike', (req, res) => { dislike.handleDislikeGET(req, res, db, fetc
 app.post('/addwatched', (req, res) => { watched.handleWatchedPOST(req, res, db) });
 app.post('/watched', (req, res) => { watched.handleWatchedGET(req, res, db, fetch, apiKey) });
 
+//#endregion
+
+//#region TV
+
+const popularTV = require('./controllers/TV/PopularTV');
+
+app.post('/popularTV', (req, res) => { popularTV.popularGet(req, res, fetch, apiKey) });
+
+//#endregion
+
 app.listen(process.env.PORT || 3001, () => console.log('App is running on port 3001'))
-
-
-
