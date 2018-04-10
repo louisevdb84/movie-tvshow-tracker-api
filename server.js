@@ -74,11 +74,14 @@ const popularTV = require('./controllers/TV/PopularTV');
 const topRatedTV = require('./controllers/TV/TopRatedTV');
 const onTheAirTV = require('./controllers/TV/OnTheAirTV');
 const airingTodayTV = require('./controllers/TV/AiringTodayTV');
+const TVShowDetails = require('./controllers/TV/TVShowDetails');
 
 app.post('/popularTV', (req, res) => { popularTV.popularGet(req, res, fetch, apiKey) });
 app.post('/topRatedTV', (req, res) => { topRatedTV.topRatedGet(req, res, fetch, apiKey) });
 app.post('/onTheAirTV', (req, res) => { onTheAirTV.onTheAirGet(req, res, fetch, apiKey) });
 app.post('/airingTodayTV', (req, res) => { airingTodayTV.airingTodayGet(req, res, fetch, apiKey) });
+
+app.post('/detailsTV', (req, res) => { TVShowDetails.detailsGet(req, res, fetch, apiKey) });
 
 //#endregion
 
