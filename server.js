@@ -75,6 +75,7 @@ const topRatedTV = require('./controllers/TV/TopRatedTV');
 const onTheAirTV = require('./controllers/TV/OnTheAirTV');
 const airingTodayTV = require('./controllers/TV/AiringTodayTV');
 const TVShowDetails = require('./controllers/TV/TVShowDetails');
+const watchlistTV = require('./controllers/TV/WatchlistTV');
 
 app.post('/popularTV', (req, res) => { popularTV.popularGet(req, res, fetch, apiKey) });
 app.post('/topRatedTV', (req, res) => { topRatedTV.topRatedGet(req, res, fetch, apiKey) });
@@ -82,6 +83,10 @@ app.post('/onTheAirTV', (req, res) => { onTheAirTV.onTheAirGet(req, res, fetch, 
 app.post('/airingTodayTV', (req, res) => { airingTodayTV.airingTodayGet(req, res, fetch, apiKey) });
 
 app.post('/detailsTV', (req, res) => { TVShowDetails.detailsGet(req, res, fetch, apiKey) });
+
+app.post('/addwatchlistTV', (req, res) => { watchlistTV.handleWatchlistPOST(req, res, db) });
+app.post('/deletewatchlistTV', (req, res) => { watchlistTV.handleWatchlistDelete(req, res, db) });
+app.post('/watchlistTV', (req, res) => { watchlistTV.handleWatchlistGET(req, res, db, fetch, apiKey) });
 
 //#endregion
 
