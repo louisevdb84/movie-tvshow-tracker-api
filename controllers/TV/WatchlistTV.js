@@ -1,12 +1,13 @@
 const handleWatchlistPOST = (req, res, db) => {
-    const { username, id } = req.body;
+    const { username, id, season } = req.body;
     if (!username || !id) {
       return res.status(400).json('User must be logged in');
   }
 
   db.insert({          
     username: username,
-    tvid: id
+    tvid: id,
+    season: season
   })
       .into('watchlisttv')    
       .returning('tvid')    
@@ -23,7 +24,7 @@ const handleWatchlistGET = (req, res, db, fetch, apiKey) => {
     }    
     
         
-  db.select('tvid').from('watchlisttv')
+  db.select('tvid', 'season').from('watchlisttv')
       .where('username', '=', username)        
       .then(data => {
           res.json(data);          
