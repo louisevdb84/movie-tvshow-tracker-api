@@ -17,6 +17,24 @@ const handleWatchlistPOST = (req, res, db) => {
   .catch(err => res.status(400).json('Unable to add to watchlist'))
 }
 
+const seasonUpdate = (req, res, db) => {
+    const { username, id, season } = req.body;
+    if (!username || !id) {
+      return res.status(400).json('User must be logged in');
+  }
+
+  db('watchlisttv')
+    .where('username', username).andWhere('tvid', id)
+    .update({
+        season: season
+       })
+      .returning('tvid')    
+        .then(user => {
+            res.json(user[0]);        
+  })        
+  .catch(err => res.status(400).json('Unable to update seasons'))
+}
+
 const handleWatchlistGET = (req, res, db, fetch, apiKey) => {
     const { username } = req.body;
     if (!username) {
@@ -48,7 +66,4 @@ const handleWatchlistDelete = (req, res, db) => {
             .catch(err => res.status(400).json('Unable to delete watchlist item'))    
 }   
 
-
-
-
-module.exports = { handleWatchlistGET, handleWatchlistPOST, handleWatchlistDelete }
+module.exports = { seasonUpdate,handleWatchlistGET, handleWatchlistPOST, handleWatchlistDelete }

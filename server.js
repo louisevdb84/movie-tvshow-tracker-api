@@ -88,6 +88,9 @@ app.post('/addwatchlistTV', (req, res) => { watchlistTV.handleWatchlistPOST(req,
 app.post('/deletewatchlistTV', (req, res) => { watchlistTV.handleWatchlistDelete(req, res, db) });
 app.post('/watchlistTV', (req, res) => { watchlistTV.handleWatchlistGET(req, res, db, fetch, apiKey) });
 
+app.post('/seasonupdate', (req, res) => { watchlistTV.seasonUpdate(req, res, db, fetch, apiKey) });
+
+
 //#endregion
 
 app.listen(process.env.PORT || 3001, () => console.log('App is running on port 3001'))
