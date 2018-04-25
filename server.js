@@ -77,6 +77,8 @@ const airingTodayTV = require('./controllers/TV/AiringTodayTV');
 const TVShowDetails = require('./controllers/TV/TVShowDetails');
 const watchlistTV = require('./controllers/TV/WatchlistTV');
 const searchTV = require('./controllers/TV/SearchTV');
+const dislikeTV = require('./controllers/TV/DislikeTV');
+const watchedTV = require('./controllers/TV/WatchedTV');
 
 app.post('/popularTV', (req, res) => { popularTV.popularGet(req, res, fetch, apiKey) });
 app.post('/topRatedTV', (req, res) => { topRatedTV.topRatedGet(req, res, fetch, apiKey) });
@@ -92,6 +94,13 @@ app.post('/watchlistTV', (req, res) => { watchlistTV.handleWatchlistGET(req, res
 app.post('/seasonupdate', (req, res) => { watchlistTV.seasonUpdate(req, res, db, fetch, apiKey) });
 
 app.post('/searchTV', (req, res) => { searchTV.handleSearchPost(req, res, fetch, apiKey) });
+
+app.post('/addDislikeTV', (req, res) => { dislikeTV.handleDislikePOST(req, res, db) });
+app.post('/deleteDislikeTV', (req, res) => { dislikeTV.handleDislikeDelete(req, res, db) });
+app.post('/dislikeTV', (req, res) => { dislikeTV.handleDislikeGET(req, res, db, fetch, apiKey) });
+
+app.post('/addwatchedTV', (req, res) => { watchedTV.handleWatchedPOST(req, res, db) });
+app.post('/watchedTV', (req, res) => { watchedTV.handleWatchedGET(req, res, db, fetch, apiKey) });
 
 
 //#endregion
