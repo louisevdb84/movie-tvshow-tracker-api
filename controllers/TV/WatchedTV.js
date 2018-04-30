@@ -6,10 +6,10 @@ const handleWatchedPOST = (req, res, db) => {
 
   db.insert({          
     username: username,
-    tvId: id
+    tvid: id
   })
-      .into('watchedTV')    
-      .returning('tvId')    
+      .into('watchedtv')    
+      .returning('tvid')    
         .then(user => {
             res.json(user[0]);        
   })        
@@ -23,7 +23,7 @@ const handleWatchedGET = (req, res, db, fetch, apiKey) => {
     }    
     
         
-  db.select('tvId').from('watchedTV')
+  db.select('tvid').from('watchedtv')
       .where('username', '=', username)        
       .then(data => {
           res.json(data);          
@@ -39,10 +39,10 @@ const handleWatchedDelete = (req, res, db) => {
         return res.status(400).json('Incorrect form submission');
     }
     
-    db('watchedTV').where('tvId', id).andWhere('username', username)
+    db('watchedtv').where('tvid', id).andWhere('username', username)
         .del()    
             .then(entry => {
-                res.json({ tvId:  id  } );
+                res.json({ tvid:  id  } );
             })
             .catch(err => res.status(400).json('Unable to delete watchlist item'))    
 }     
